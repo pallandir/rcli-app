@@ -16,7 +16,14 @@ fn main() -> std::io::Result<()> {
     println!("Pattern: {:?}, Path: {:?}", args.pattern, args.path);
 
     for line in reader.lines() {
-        println!("Line: {:?}", line);
+        match line {
+            Ok(line) => {
+                if line.contains(&args.pattern) {
+                    println!("Line: {:?}", line);
+                }
+            }
+            Err(e) => eprintln!("Failed to read line: {}", e),
+        }
     }
     Ok(())
 }
