@@ -13,7 +13,6 @@ fn main() -> std::io::Result<()> {
     let args = CliArgs::parse();
     let file = File::open(&args.path)?;
     let reader = BufReader::new(file);
-    println!("Pattern: {:?}, Path: {:?}", args.pattern, args.path);
     find_pattern(reader, args.pattern);
     Ok(())
 }
