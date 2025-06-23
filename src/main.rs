@@ -14,16 +14,19 @@ fn main() -> std::io::Result<()> {
     let file = File::open(&args.path)?;
     let reader = BufReader::new(file);
     println!("Pattern: {:?}, Path: {:?}", args.pattern, args.path);
+    find_pattern(reader, args.pattern);
+    Ok(())
+}
 
+fn find_pattern(reader: BufReader<File>, pattern: String) {
     for line in reader.lines() {
         match line {
             Ok(line) => {
-                if line.contains(&args.pattern) {
+                if line.contains(&pattern) {
                     println!("Line: {:?}", line);
                 }
             }
             Err(e) => eprintln!("Failed to read line: {}", e),
         }
     }
-    Ok(())
 }
